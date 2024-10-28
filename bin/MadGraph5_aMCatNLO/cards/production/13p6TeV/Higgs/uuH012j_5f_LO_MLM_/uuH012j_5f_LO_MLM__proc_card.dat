@@ -1,0 +1,33 @@
+import model SMEFTsim_U35_MwScheme_UFO-lightQuarkYukawas
+
+define p = g u d s c b u~ d~ s~ c~ b~
+define j = p
+# quark-partons that are not u or ubar, respectively
+define qnu = d s c b
+define qbarnubar = d~ s~ c~ b~
+
+# In some processes, h radiation from other quarks still contributes
+# but ddh, ssh, cch, bbh coupling will be set to zero
+
+generate u u~             > h     QCD==0 SMHLOOP==0 @0
+
+add process u u~          > h j   QCD==1 SMHLOOP==0 @1
+add process u  g          > h j   QCD==1 SMHLOOP==0 @2
+add process u~ g          > h j   QCD==1 SMHLOOP==0 @3
+
+add process u u~          > h j j QCD==2 SMHLOOP==0 @4
+add process d d~          > h j j QCD==2 SMHLOOP==0 @5
+add process s s~          > h j j QCD==2 SMHLOOP==0 @5
+add process c c~          > h j j QCD==2 SMHLOOP==0 @5
+add process b b~          > h j j QCD==2 SMHLOOP==0 @5
+add process u  g          > h j j QCD==2 SMHLOOP==0 @6
+add process u~ g          > h j j QCD==2 SMHLOOP==0 @7
+add process u  u          > h j j QCD==2 SMHLOOP==0 @8
+add process u~ u~         > h j j QCD==2 SMHLOOP==0 @9
+add process u qnu         > h j j QCD==2 SMHLOOP==0 @10
+add process u qbarnubar   > h j j QCD==2 SMHLOOP==0 @11
+add process u~ qnu        > h j j QCD==2 SMHLOOP==0 @12
+add process u~ qbarnubar  > h j j QCD==2 SMHLOOP==0 @13
+add process g g           > h j j QCD==2 SMHLOOP==0 @14
+
+output uuH012j_5f_LO_MLM_<MASS> -nojpeg
